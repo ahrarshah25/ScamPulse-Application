@@ -11,8 +11,8 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <nav className="w-full bg-white sticky border-b shadow-sm">
+    <div className="sticky" style={{position: "sticky"}}>
+      <nav className="w-full bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Logo />
 
@@ -64,7 +64,7 @@ const Navbar = () => {
       </aside>
       
 
-    </>
+    </div>
   );
 };
 
