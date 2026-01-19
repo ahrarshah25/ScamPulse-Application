@@ -4,15 +4,13 @@ import { Menu, X, LogIn, UserPlus } from "lucide-react";
 import Logo from "./Logo";
 import Tabs from "./Tabs";
 import Button from "./Button";
-import Rain from '../../Animations/Rain'
-import CyberEffect from "../../Animations/CyberEffect";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="sticky" style={{position: "sticky"}}>
-      <nav className="w-full bg-white border-b shadow-sm">
+    <div className="sticky top-0 z-[999]">
+      <nav className="w-full bg-white border-b shadow-sm relative z-[999]">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Logo />
 
@@ -35,14 +33,14 @@ const Navbar = () => {
       </nav>
 
       <div
-        className={`fixed inset-0 z-50 bg-black/40 transition-opacity ${
+        className={`fixed inset-0 z-[998] bg-black/40 transition-opacity ${
           open ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         onClick={() => setOpen(false)}
       />
 
       <aside
-        className={`fixed top-0 right-0 z-50 h-full w-72 bg-white shadow-xl transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 z-[999] h-full w-72 bg-white shadow-xl transform transition-transform duration-300 ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -62,8 +60,6 @@ const Navbar = () => {
           <Button icon={UserPlus} name="Sign Up" variant="outline" />
         </div>
       </aside>
-      
-
     </div>
   );
 };
