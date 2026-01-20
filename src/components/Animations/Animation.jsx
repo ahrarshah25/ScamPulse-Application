@@ -4,11 +4,12 @@ import CyberEffect from "./CyberEffect";
 
 const Animation = () => {
   return (
-    <div className="relative min-h-screen bg-white">
+    <div className="absolute inset-0 bg-white">
       <Rain count={50} />
       <CyberEffect />
     </div>
   );
 };
+
 
 export default Animation;
