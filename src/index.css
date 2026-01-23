@@ -86,3 +86,18 @@ body {
     transform: rotate(360deg);
   }
 }
+
+html.dark-mode {
+  filter: invert(1) hue-rotate(180deg);
+  background: #111;
+}
+
+html.dark-mode img,
+html.dark-mode video {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+
+.swal-margin-top {
+  margin-top: 50px !important;
+}

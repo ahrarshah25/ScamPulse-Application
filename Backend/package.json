@@ -1,0 +1,16 @@
+{
+  "name": "scampulse-backend",
+  "version": "1.0.0",
+  "main": "subscribe.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cros": "^1.1.0",
+    "nodemailer": "^7.0.12"
+  },
+  "description": ""
+}
