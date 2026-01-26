@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Button from "../Navbar/Button";
 import { MailCheck } from "lucide-react";
-import { subscribeEmail } from "../../../api/subscribe/subscribe";
+import { subscribeEmail } from "../../../api/subscribe/subscribe.api";
+import emailHandler from "../../../helpers/emailHandler";
 import Swal from "sweetalert2";
 
 const Input = () => {
@@ -9,29 +10,28 @@ const Input = () => {
   const [loading, setLoading] = useState(false);
 
   const showLoading = () => {
-  Swal.fire({
-    toast: true,
-    position: "top",
-    title: "Processing...",
-    didOpen: () => {
-      Swal.showLoading();
-    },
-    showConfirmButton: false,
-    allowOutsideClick: false,
-    allowEscapeKey: false,
-    customClass: {
-      popup: "swal-margin-top",
-    },
-  });
-};
-
+    Swal.fire({
+      toast: true,
+      position: "top-end",
+      title: "Processing...",
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      customClass: {
+        popup: "swal-margin-top",
+      },
+    });
+  };
 
   const subscribe = async () => {
     if (!subscribeInput) {
       console.log("Empty input");
       Swal.fire({
         toast: true,
-        position: "top",
+        position: "top-end",
         icon: "error",
         title: "Empty Input.",
         showConfirmButton: false,
@@ -46,6 +46,22 @@ const Input = () => {
     try {
       setLoading(true);
 
+      if (!emailHandler(subscribeInput)) {
+        Swal.fire({
+          toast: true,
+          position: "top-end",
+          icon: "error",
+          title:
+            "Pleasde Enter Correct Email WIth Correct Syntax.\nFor Example: scampulse.io@gmail.com",
+          showConfirmButton: false,
+          timer: 2000,
+          customClass: {
+            popup: "swal-margin-top",
+          },
+        });
+        return;
+      }
+
       showLoading();
 
       const res = await subscribeEmail(subscribeInput);
@@ -54,22 +70,22 @@ const Input = () => {
 
       if (res.status === 200 || res.data?.success) {
         Swal.fire({
-        toast: true,
-        position: "top",
-        icon: "success",
-        title: `Subscribe Successfully To Your Email ${subscribeInput}.`,
-        showConfirmButton: false,
-        timer: 2000,
-        customClass: {
-          popup: "swal-margin-top",
-        },
-      })
+          toast: true,
+          position: "top-end",
+          icon: "success",
+          title: `Subscribe Successfully To Your Email ${subscribeInput}.`,
+          showConfirmButton: false,
+          timer: 2000,
+          customClass: {
+            popup: "swal-margin-top",
+          },
+        });
         setSubscribeInput("");
       }
     } catch (err) {
       Swal.fire({
         toast: true,
-        position: "top",
+        position: "top-end",
         icon: "error",
         title: `Error: ` + (err.response?.data?.message || err.message),
         showConfirmButton: false,
@@ -77,7 +93,7 @@ const Input = () => {
         customClass: {
           popup: "swal-margin-top",
         },
-      })
+      });
     } finally {
       setLoading(false);
     }
